@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teorías de la Administración</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 25px;
+            padding: 50px;
+            box-shadow: 0 25px 80px rgba(0,0,0,0.4);
+        }
+        
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 50px;
+            font-size: 1.3em;
+            font-weight: 500;
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(180deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            border-radius: 3px;
+        }
+        
+        .theory-card {
+            display: flex;
+            margin-bottom: 50px;
+            position: relative;
+        }
+        
+        .theory-card:nth-child(odd) {
+            flex-direction: row;
+        }
+        
+        .theory-card:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+        
+        .card-content {
+            width: 48%;
+            padding: 30px;
+            border-radius: 20px;
+            position: relative;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 3px solid transparent;
+        }
+        
+        .card-content:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .theory-card:nth-child(1) .card-content {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border-color: #f59e0b;
+        }
+        
+        .theory-card:nth-child(2) .card-content {
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            border-color: #3b82f6;
+        }
+        
+        .theory-card:nth-child(3) .card-content {
+            background: linear-gradient(135deg, #fce7f3 0%, #fbcfe8 100%);
+            border-color: #ec4899;
+        }
+        
+        .theory-card:nth-child(4) .card-content {
+            background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+            border-color: #6366f1;
+        }
+        
+        .theory-card:nth-child(5) .card-content {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border-color: #10b981;
+        }
+        
+        .theory-card:nth-child(6) .card-content {
+            background: linear-gradient(135deg, #fef08a 0%, #fde047 100%);
+            border-color: #eab308;
+        }
+        
+        .theory-card:nth-child(7) .card-content {
+            background: linear-gradient(135deg, #fecaca 0%, #fca5a5 100%);
+            border-color: #ef4444;
+        }
+        
+        .theory-card:nth-child(8) .card-content {
+            background: linear-gradient(135deg, #d8b4fe 0%, #c084fc 100%);
+            border-color: #a855f7;
+        }
+        
+        .theory-card:nth-child(odd) .card-content {
+            margin-right: auto;
+        }
+        
+        .theory-card:nth-child(even) .card-content {
+            margin-left: auto;
+        }
+        
+        .dot {
+            position: absolute;
+            left: 50%;
+            top: 40px;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: white;
+            border: 5px solid;
+            border-radius: 50%;
+            z-index: 1;
+            box-shadow: 0 0 0 6px rgba(99, 102, 241, 0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.1); }
+        }
+        
+        .theory-card:nth-child(1) .dot { border-color: #f59e0b; }
+        .theory-card:nth-child(2) .dot { border-color: #3b82f6; }
+        .theory-card:nth-child(3) .dot { border-color: #ec4899; }
+        .theory-card:nth-child(4) .dot { border-color: #6366f1; }
+        .theory-card:nth-child(5) .dot { border-color: #10b981; }
+        .theory-card:nth-child(6) .dot { border-color: #eab308; }
+        .theory-card:nth-child(7) .dot { border-color: #ef4444; }
+        .theory-card:nth-child(8) .dot { border-color: #a855f7; }
+        
+        .theory-icon {
+            display: inline-flex;
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .theory-card:nth-child(1) .theory-icon { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .theory-card:nth-child(2) .theory-icon { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .theory-card:nth-child(3) .theory-icon { background: linear-gradient(135deg, #ec4899, #db2777); }
+        .theory-card:nth-child(4) .theory-icon { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+        .theory-card:nth-child(5) .theory-icon { background: linear-gradient(135deg, #10b981, #059669); }
+        .theory-card:nth-child(6) .theory-icon { background: linear-gradient(135deg, #eab308, #ca8a04); }
+        .theory-card:nth-child(7) .theory-icon { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .theory-card:nth-child(8) .theory-icon { background: linear-gradient(135deg, #a855f7, #9333ea); }
+        
+        .card-content h3 {
+            color: #1e293b;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+        
+        .card-content p {
+            color: #334155;
+            line-height: 1.8;
+            font-size: 1.05em;
+            margin-bottom: 15px;
+        }
+        
+        .characteristics {
+            background: rgba(255,255,255,0.6);
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border-left: 4px solid;
+        }
+        
+        .theory-card:nth-child(1) .characteristics { border-color: #f59e0b; }
+        .theory-card:nth-child(2) .characteristics { border-color: #3b82f6; }
+        .theory-card:nth-child(3) .characteristics { border-color: #ec4899; }
+        .theory-card:nth-child(4) .characteristics { border-color: #6366f1; }
+        .theory-card:nth-child(5) .characteristics { border-color: #10b981; }
+        .theory-card:nth-child(6) .characteristics { border-color: #eab308; }
+        .theory-card:nth-child(7) .characteristics { border-color: #ef4444; }
+        .theory-card:nth-child(8) .characteristics { border-color: #a855f7; }
+        
+        .characteristics h4 {
+            color: #1e293b;
+            font-size: 1em;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .characteristics ul {
+            margin-left: 20px;
+            color: #475569;
+        }
+        
+        .characteristics li {
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+        
+        .highlight {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 700;
+            margin-top: 10px;
+            font-size: 0.95em;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        
+        .theory-card:nth-child(1) .highlight { background: #f59e0b; color: white; }
+        .theory-card:nth-child(2) .highlight { background: #3b82f6; color: white; }
+        .theory-card:nth-child(3) .highlight { background: #ec4899; color: white; }
+        .theory-card:nth-child(4) .highlight { background: #6366f1; color: white; }
+        .theory-card:nth-child(5) .highlight { background: #10b981; color: white; }
+        .theory-card:nth-child(6) .highlight { background: #eab308; color: white; }
+        .theory-card:nth-child(7) .highlight { background: #ef4444; color: white; }
+        .theory-card:nth-child(8) .highlight { background: #a855f7; color: white; }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .timeline::before {
+                left: 20px;
+            }
+            
+            .theory-card,
+            .theory-card:nth-child(even) {
+                flex-direction: column;
+            }
+            
+            .card-content,
+            .theory-card:nth-child(odd) .card-content,
+            .theory-card:nth-child(even) .card-content {
+                width: 100%;
+                margin: 0 0 0 40px;
+            }
+            
+            .dot {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 Teorías de la Administración</h1>
+        <p class="subtitle">Evolución histórica del pensamiento administrativo y organizacional</p>
+        
+        <div class="timeline">
+            <div class="theory-card">
+                <div class="dot"></div>
+                <div class="card-content">
+                    <div class="theory-icon">🏛️</div>
+                    <h3>Escuela Clásica y Tradicional</h3>
+                    <p>Fundamentos de la administración científica surgidos a principios del siglo XX. Se enfoca en la eficiencia operativa, la división del trabajo y la estructura organizacional formal. Busca la "mejor manera" de realizar cada tarea mediante estudios de tiempos y movimientos.</p>
+                    <div class="characteristics">
+                        <h4>🔑 Características clave:</h4>
+                        <ul>
+                            <li>Estandarización de procesos y procedimientos</li>
+                            <li>Jerarquía y cadena de mando clara</li>
+                            <li>Supervisión directa y control riguroso</li>
+                            <li>Remuneración por productividad</li>
+                        </ul>
+                    </div>
+                    <span class="highlight">Taylor, Fayol & Ford</span>
+                </div>
+            </div>
+            
+            <div class="theory-card">
+                <div class="dot"></div>
+                <div class="card-content">
+                    <div class="theory-icon">🔄</div>
+                    <h3>Escuela Neoclásica</h3>
+                    <p>Actualización y modernización de los principios clásicos adaptados a las nuevas realidades organizacionales. Introduce la Administración por Objetivos (APO) y enfatiza los resultados sobre los procesos. Combina teoría con práctica administrativa contemporánea.</p>
+                    <div class="characteristics">
+                        <h4>🔑 Características clave:</h4>
+                        <ul>
+                            <li>Énfasis en objetivos y resultados medibles</li>
+                            <li>Descentralización de decisiones</li>
+                            <li>Flexibilidad organizacional</li>
+                            <li>Eficiencia y eficacia como prioridades</li>
+                        </ul>
+                    </div>
+                    <span class="highlight">Peter Drucker</span>
+                </div>
+            </div>
+            
+            <div class="theory-card">
+                <div class="dot"></div>
+                <div class="card-content">
+                    <div class="theory-icon">👥</div>
+                    <h3>Escuela de las Relaciones Humanas</h3>
+                    <p>Revolución humanista en la administración que coloca al trabajador como ser social en el centro de la organización. Surge como respuesta a los enfoques mecanicistas, enfatizando la motivación, el liderazgo, la comunicación y la satisfacción laboral como factores determinantes del desempeño.</p>
+                    <div class="characteristics">
+                        <h4>🔑 Características clave:</h4>
+                        <ul>
+                            <li>Motivación y necesidades humanas</li>
+                            <li>Grupos informales y dinámica social</li>
+                            <li>Comunicación organizacional efectiva</li>
+                            <li>Liderazgo participativo y democrático</li>
+                        </ul>
+                    </div>
+                    <span class="highlight">Elton Mayo & Abraham Maslow</span>
+                </div>
+            </div>
+            
+            <div class="theory-card">
+                <div class="dot"></div>
+                <div class="card-content">
+                    <div class="theory-icon">🔢</div>
+                    <h3>Escuela Matemática</h3>
+                    <p>Aplicación de métodos cuantitativos, estadística, modelos matemáticos y algoritmos para la resolución de problemas administrativos complejos. Utiliza la investigación de operaciones para optimizar recursos, minimizar costos y maximizar resultados mediante análisis riguroso.</p>
+                    <div class="characteristics">
+                        <h4>🔑 Características clave:</h4>
+                        <ul>
+                            <li>Modelos matemáticos predictivos</li>
+                            <li>Optimización de recursos y procesos</li>
+                            <li>Análisis cuantitativo de decisiones</li>
+                            <li>Simulación y programación lineal</li>
+                        </ul>
+                    </div>
+                    <span class="highlight">Investigación de Operaciones</span>
+                </div>
+            </div>
+            
+            <div class="theory-card">
+                <div class="dot"></div>
+                <div class="card-content">
+                    <div class="theory-icon">🤝</div>
+                    <h3>Escuela de los Sistemas Sociales</h3>
+                    <p>Concibe a las organizaciones como sistemas sociales cooperativos donde las personas interactúan para alcanzar objetivos comunes. Analiza la organización formal e informal, la cooperación voluntaria, la autoridad y la toma de decisiones como procesos sociales fundamentales.</p>
+                    <div class="characteristics">
+                        <h4>🔑 Características clave:</h4>
+                        <ul>
+                            <li>Cooperación entre individuos y grupos</li>
+                            <li>Equilibrio entre contribución y recompensa</li>
+                            <li>Autoridad basada en aceptación</li>
+                            <li>Organización como sistema cooperativo</li>
+                        </ul>
+                    </div>
+                    <span class="highlight">Chester Barnard</span>
+                </div>
+            </div>
+            
+            <div class="theory-card">
+                <div class="dot"></div>
+                <div class="card-content">
+                    <div class="theory-icon">⚙️</div>
+                    <h3>Escuela de la Teoría de Sistemas</h3>
+                    <p>Visión holística e integradora de las organizaciones como sistemas abiertos que interactúan constantemente con su entorno. Analiza la interrelación entre subsistemas, el flujo de entradas-procesos-salidas, la retroalimentación y la adaptación al cambio ambiental.</p>
+                    <div class="characteristics">
+                        <h4>🔑 Características clave:</h4>
+                        <ul>
+                            <li>Enfoque holístico e integrador</li>
+                            <li>Interrelación entre subsistemas</li>
+                            <li>Entradas, procesos y salidas</li>
+                            <li>Retroalimentación y autorregulación</li>
+                        </ul>
+                    </div>
+                    <span class="highlight">Ludwig von Bertalanffy</span>
+                </div>
+            </div>
+            
+            <div class="theory-card">
+                <div class="dot"></div>
+                <div class="card-content">
+                    <div class="theory-icon">🏢</div>
+                    <h3>Escuela de la Teoría Estructuralista</h3>
+                    <p>Estudia las estructuras organizacionales, la burocracia y las relaciones de poder dentro de las organizaciones. Busca el equilibrio entre organización formal e informal, analiza los conflictos organizacionales y propone tipologías de estructuras según objetivos y contextos específicos.</p>
+                    <div class="characteristics">
+                        <h4>🔑 Características clave:</h4>
+                        <ul>
+                            <li>Análisis de estructuras burocráticas</li>
+                            <li>Conflictos y dilemas organizacionales</li>
+                            <li>Formal vs informal en equilibrio</li>
+                            <li>Tipologías de organizaciones</li>
+                        </ul>
+                    </div>
+                    <span class="highlight">Max Weber & Amitai Etzioni</span>
+                </div>
+            </div>
+            
+            <div class="theory-card">
+                <div class="dot"></div>
+                <div class="card-content">
+                    <div class="theory-icon">⏱️</div>
+                    <h3>Escuela de la Teoría de Colas</h3>
+                    <p>Especialización matemática enfocada en la optimización de tiempos de espera, flujos de trabajo y eficiencia en sistemas de servicio. Analiza patrones de llegada, tiempos de atención y capacidad del sistema para minimizar cuellos de botella y mejorar la experiencia del cliente.</p>
+                    <div class="characteristics">
+                        <h4>🔑 Características clave:</h4>
+                        <ul>
+                            <li>Optimización de tiempos de espera</li>
+                            <li>Análisis de flujo de procesos</li>
+                            <li>Capacidad del sistema y servidores</li>
+                            <li>Minimización de cuellos de botella</li>
+                        </ul>
+                    </div>
+                    <span class="highlight">Gestión de Servicios & Operaciones</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
